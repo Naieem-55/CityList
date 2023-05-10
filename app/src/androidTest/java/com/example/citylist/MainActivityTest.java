@@ -63,7 +63,7 @@ public class MainActivityTest {
         onView(withId(R.id.button_confirm)).perform(click()); //Confirm the city name and add to the list
 
         onData(anything()).inAdapterView(withId(R.id.city_list)).atPosition(0).
-                check(matches((withText("Edmonton")))); //Check the content on the list - no content in this case
+        check(matches((withText("Edmonton")))); //Check the content on the list - no content in this case
     }
 
     @Test
@@ -74,6 +74,31 @@ public class MainActivityTest {
 
         onData(anything()).inAdapterView(withId(R.id.city_list)).atPosition(0).perform(click()); //Check the content on the list - no content in this case
         Espresso.pressBack(); //Back button
+    }
+
+    @Test
+    public void lab3Test(){
+
+        onView(withId(R.id.button_add)).perform(click());
+        onView(withId(R.id.editText_name)).perform(ViewActions.typeText("Edmonton"));
+        Espresso.pressBack();
+        onView(withId(R.id.button_confirm)).perform(click());
+
+        onView(withId(R.id.button_add)).perform(click());
+        onView(withId(R.id.editText_name)).perform(ViewActions.typeText("Rajshahi"));
+        Espresso.pressBack();
+        onView(withId(R.id.button_confirm)).perform(click());
+
+        onView(withId(R.id.button_add)).perform(click());
+        onView(withId(R.id.editText_name)).perform(ViewActions.typeText("Nawabganj"));
+        Espresso.pressBack();
+        onView(withId(R.id.button_confirm)).perform(click());
+
+        onData(anything()).inAdapterView(withId(R.id.city_list)).atPosition(1).perform(click());
+        onView(withId(R.id.second)).check(matches(isDisplayed()));
+        onView(withText("Rajshahi")).check(matches(isDisplayed()));
+        onView(withId(R.id.button)).perform(click());
+        onView(withId(R.id.main)).check(matches(isDisplayed()));
     }
 
 }
